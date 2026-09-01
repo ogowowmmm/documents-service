@@ -5,11 +5,12 @@ import by.ogowowmmm.documentsapi.storage.Storage
 import org.springframework.stereotype.Service
 import java.util.UUID
 
+// Зач нужен ваще
 @Service
 class DocumentStorage(val storage: Storage) {
 
-    fun upload(fileUploadData: FileUploadData) {
-        storage.upload(fileUploadData)
+    fun upload(fileUploadData: FileUploadData) : UUID {
+        return storage.upload(fileUploadData)
     }
 
     fun download(uuid: UUID) {

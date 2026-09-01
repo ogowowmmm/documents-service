@@ -1,7 +1,11 @@
 package by.ogowowmmm.documentsapi.storage.minio
 
 import by.ogowowmmm.documentsapi.models.FileUploadData
-import by.ogowowmmm.documentsapi.storage.*
+import by.ogowowmmm.documentsapi.storage.Storage
+import by.ogowowmmm.documentsapi.storage.exceptions.DocumentDeletionException
+import by.ogowowmmm.documentsapi.storage.exceptions.DocumentDownloadingException
+import by.ogowowmmm.documentsapi.storage.exceptions.DocumentNotFoundException
+import by.ogowowmmm.documentsapi.storage.exceptions.DocumentUploadingException
 import io.minio.GetObjectArgs
 import io.minio.MinioClient
 import io.minio.PutObjectArgs
@@ -16,16 +20,18 @@ class MinioStorage(
     val properties: MinioProperties
 ) : Storage {
 
-    override fun upload(fileUploadData: FileUploadData) {
+    override fun upload(fileUploadData: FileUploadData): UUID {
         try {
+            val uuid = UUID.randomUUID()
             client.putObject(
                 PutObjectArgs.builder()
                     .bucket(properties.bucket)
                     .stream(fileUploadData.inputStream, fileUploadData.size, -1)
-                    .`object`(fileUploadData.idempotencyKey.toString())
+                    .`object`(uuid.toString())
                     .contentType(fileUploadData.contentType)
                     .build()
             )
+            return uuid
         } catch (e: Exception) {
             throw DocumentUploadingException(e)
         }

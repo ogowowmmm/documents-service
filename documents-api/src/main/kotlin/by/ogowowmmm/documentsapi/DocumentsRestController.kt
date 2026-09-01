@@ -15,9 +15,9 @@ class DocumentsRestController(val core: DocumentCore) {
     fun uploadDocument(
         @RequestPart("file") file: MultipartFile,
         @RequestParam("idempotencyKey") idempotencyKey: UUID,
-        @RequestParam("replaceDocumentId", required = false) replaceDocumentId: String?,
+        @RequestParam("replaceDocumentId", required = false) replaceDocumentId: UUID?,
         @AuthenticationPrincipal jwt: Jwt
-    ) {
-        core.upload(idempotencyKey, replaceDocumentId, file, UUID.fromString(jwt.subject))
+    ): UUID {
+        return core.upload(idempotencyKey, replaceDocumentId, file, UUID.fromString(jwt.subject))
     }
 }

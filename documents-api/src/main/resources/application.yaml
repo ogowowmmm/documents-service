@@ -8,6 +8,9 @@ spring:
     uri: mongodb://admin:admin@localhost:27017/document_pipeline?authSource=admin
     representation:
       uuid: standard
+  data:
+    mongodb:
+      auto-index-creation: true
   security:
     oauth2:
       resourceserver:

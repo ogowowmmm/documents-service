@@ -5,7 +5,7 @@ import java.io.InputStream
 import java.util.*
 
 interface Storage {
-    fun upload(fileUploadData: FileUploadData)
+    fun upload(fileUploadData: FileUploadData) : UUID
     fun download(uuid: UUID): InputStream
     fun delete(uuid: UUID)
 }
