@@ -29,6 +29,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:4.1.1")
     implementation("org.projectlombok:lombok:1.18.46")
     implementation("io.minio:minio:9.0.3")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 }
 
 kotlin {

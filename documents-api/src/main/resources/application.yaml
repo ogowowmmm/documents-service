@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: documents-api
+  mongodb:
+    uri: mongodb://admin:admin@localhost:27017/document_pipeline?authSource=admin
+    representation:
+      uuid: standard
 
 minio:
   endpoint: http://localhost:9000

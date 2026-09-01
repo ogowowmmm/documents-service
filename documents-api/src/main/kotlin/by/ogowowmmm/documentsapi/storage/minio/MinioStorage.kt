@@ -6,7 +6,6 @@ import io.minio.GetObjectArgs
 import io.minio.MinioClient
 import io.minio.PutObjectArgs
 import io.minio.RemoveObjectArgs
-import io.minio.errors.MinioException
 import org.springframework.stereotype.Component
 import java.io.InputStream
 import java.util.*
@@ -17,19 +16,19 @@ class MinioStorage(
     val properties: MinioProperties
 ) : Storage {
 
-    override fun upload(fileUploadData: FileUploadData): UUID = try {
-        val uuid = UUID.randomUUID()
-        client.putObject(
-            PutObjectArgs.builder()
-                .bucket(properties.bucket)
-                .stream(fileUploadData.inputStream, fileUploadData.size, -1)
-                .`object`(uuid.toString())
-                .contentType(fileUploadData.contentType)
-                .build()
-        )
-        uuid
-    } catch (e: Exception) {
-        throw DocumentUploadingException(e)
+    override fun upload(fileUploadData: FileUploadData) {
+        try {
+            client.putObject(
+                PutObjectArgs.builder()
+                    .bucket(properties.bucket)
+                    .stream(fileUploadData.inputStream, fileUploadData.size, -1)
+                    .`object`(fileUploadData.idempotencyKey.toString())
+                    .contentType(fileUploadData.contentType)
+                    .build()
+            )
+        } catch (e: Exception) {
+            throw DocumentUploadingException(e)
+        }
     }
 
     override fun download(uuid: UUID): InputStream = try {

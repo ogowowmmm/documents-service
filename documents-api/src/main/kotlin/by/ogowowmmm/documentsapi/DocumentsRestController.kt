@@ -10,7 +10,11 @@ import java.util.*
 class DocumentsRestController(val core: DocumentCore) {
 
     @PostMapping("/documents")
-    fun post(@RequestParam("key") idempotencyKey: String, @RequestPart("file") file: MultipartFile): UUID {
-        return core.upload(idempotencyKey, file)
+    fun uploadDocument(
+        @RequestPart("file") file: MultipartFile,
+        @RequestParam("idempotencyKey") idempotencyKey: UUID,
+        @RequestParam("replaceDocumentId", required = false) replaceDocumentId: String?,
+    ) {
+        core.upload(idempotencyKey, replaceDocumentId, file)
     }
 }
