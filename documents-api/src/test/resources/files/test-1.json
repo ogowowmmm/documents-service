@@ -1,0 +1,9 @@
+{
+  "field1": "value1",
+  "field2": "value2",
+  "object1": {
+    "o1field1": "o1value1",
+    "o1field2": "o1value2",
+    "o1field3": "o1value3"
+  }
+}
