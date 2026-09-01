@@ -17,7 +17,7 @@ class DocumentCore(
     val documentStorage: DocumentStorage,
 ) {
 
-    fun upload(idempotencyKey: UUID, replaceDocumentId: String?, file: MultipartFile) {
+    fun upload(idempotencyKey: UUID, replaceDocumentId: String?, file: MultipartFile, ownerId: UUID) {
         documentStorage.upload(
             FileUploadData(
                 idempotencyKey = idempotencyKey,
@@ -29,7 +29,7 @@ class DocumentCore(
 
         val document = Document(
             id = idempotencyKey,
-            ownerId = UUID.randomUUID(),
+            ownerId = ownerId,
             replaceDocumentId = replaceDocumentId?.let { UUID.fromString(replaceDocumentId) },
             metadata = FileMetadata(file.name, file.size, file.safeContentType()),
             createdAt = Clock.System.now()

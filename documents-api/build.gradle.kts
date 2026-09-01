@@ -30,6 +30,8 @@ dependencies {
     implementation("org.projectlombok:lombok:1.18.46")
     implementation("io.minio:minio:9.0.3")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
+
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 }
 
 kotlin {

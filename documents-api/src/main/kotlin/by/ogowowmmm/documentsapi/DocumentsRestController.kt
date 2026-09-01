@@ -1,6 +1,8 @@
 package by.ogowowmmm.documentsapi
 
 import by.ogowowmmm.documentsapi.services.DocumentCore
+import org.springframework.security.core.annotation.AuthenticationPrincipal
+import org.springframework.security.oauth2.jwt.Jwt
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
@@ -14,7 +16,8 @@ class DocumentsRestController(val core: DocumentCore) {
         @RequestPart("file") file: MultipartFile,
         @RequestParam("idempotencyKey") idempotencyKey: UUID,
         @RequestParam("replaceDocumentId", required = false) replaceDocumentId: String?,
+        @AuthenticationPrincipal jwt: Jwt
     ) {
-        core.upload(idempotencyKey, replaceDocumentId, file)
+        core.upload(idempotencyKey, replaceDocumentId, file, UUID.fromString(jwt.subject))
     }
 }

@@ -8,6 +8,11 @@ spring:
     uri: mongodb://admin:admin@localhost:27017/document_pipeline?authSource=admin
     representation:
       uuid: standard
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/document-pipeline
 
 minio:
   endpoint: http://localhost:9000
