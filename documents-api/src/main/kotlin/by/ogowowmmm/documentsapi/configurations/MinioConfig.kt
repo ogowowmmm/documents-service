@@ -1,5 +1,6 @@
-package by.ogowowmmm.documentsapi.storage.minio
+package by.ogowowmmm.documentsapi.configurations
 
+import by.ogowowmmm.documentsapi.configurations.properties.MinioProperties
 import io.minio.MinioClient
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean

@@ -1,4 +1,4 @@
-package by.ogowowmmm.documentsapi.storage.minio
+package by.ogowowmmm.documentsapi.configurations.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

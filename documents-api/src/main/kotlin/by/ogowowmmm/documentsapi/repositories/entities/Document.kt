@@ -1,6 +1,5 @@
-package by.ogowowmmm.documentsapi.entities
+package by.ogowowmmm.documentsapi.repositories.entities
 
-import by.ogowowmmm.documentsapi.dto.FileMetadata
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.CompoundIndex
 import org.springframework.data.mongodb.core.mapping.Document
@@ -21,4 +20,10 @@ data class Document(
     val replaceDocumentId: UUID? = null,
     val metadata: FileMetadata,
     val createdAt: Instant,
+)
+
+data class FileMetadata(
+    val name: String,
+    val size: Long,
+    val contentType: String,
 )
