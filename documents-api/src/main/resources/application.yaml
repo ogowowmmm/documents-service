@@ -15,10 +15,21 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/realms/document-pipeline
+          issuer-uri: http://localhost:8080/realms/documents-pipeline
 
 minio:
   endpoint: http://localhost:9000
   access-key: minioadmin
   secret-key: minioadmin
   bucket: documents
+
+cloud:
+  messages:
+    ru:
+      error.document.not.found: "Документ не найден"
+      error.document.already.exists: "Документ уже существует"
+      error.document.replacing.error: "Не удалось заменить документ"
+      error.document.deletion.error: "Не удалось удалить документ"
+      error.document.downloading.error: "Не удалось получить документ"
+      error.document.upload.error: "Не удалось загрузить документ"
+
