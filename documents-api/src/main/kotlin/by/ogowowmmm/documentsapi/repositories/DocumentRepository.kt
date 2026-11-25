@@ -1,11 +1,11 @@
 package by.ogowowmmm.documentsapi.repositories
 
 import by.ogowowmmm.documentsapi.repositories.entities.Document
-import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.data.repository.kotlin.CoroutineCrudRepository
 import java.util.*
 
-interface DocumentRepository : MongoRepository<Document, UUID> {
+interface DocumentRepository : CoroutineCrudRepository<Document, UUID> {
 
-    fun existsByOwnerIdAndIdempotencyKey(ownerId: UUID, idempotencyKey: UUID): Boolean
-    fun existsByOwnerIdAndId(ownerId: UUID, documentId: UUID): Boolean
+    suspend fun existsByOwnerIdAndIdempotencyKey(ownerId: UUID, idempotencyKey: UUID): Boolean
+    suspend fun existsByOwnerIdAndId(ownerId: UUID, documentId: UUID): Boolean
 }
