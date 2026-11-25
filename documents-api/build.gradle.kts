@@ -26,14 +26,24 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
-    implementation("org.springframework.boot:spring-boot-starter-web:4.1.1")
     implementation("org.projectlombok:lombok:1.18.46")
-    implementation("io.minio:minio:9.0.3")
-    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
-
     implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
-
     implementation(project(":documents-exception"))
+
+    // Spring WebFlux
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+
+// Reactive MongoDB
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+
+// Kotlin Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8")
+
+// AWS SDK для S3-совместимого MinIO
+    implementation(platform("software.amazon.awssdk:bom:2.59.7"))
+    implementation("software.amazon.awssdk:s3")
 }
 
 kotlin {
